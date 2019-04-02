@@ -1,0 +1,3 @@
+[submodule "curriculum_vitae_data"]
+	path = curriculum_vitae_data
+	url = https://github.com/arefinnomi/curriculum_vitae_data.git
