@@ -1,20 +1,20 @@
 def load_words(_file_path=""):
-    if _file_path == "":
-        return []
-    _file = open(_file_path, 'rb')
-    _text = _file.read()
-    _file.close()
-    return _text.lower().split()
+	if _file_path == "":
+		return []
+	_file = open(_file_path, 'rb')
+	_text = _file.read()
+	_file.close()
+	return _text.lower().split()
 
 
 def write_words(_file_path="", _words=[]):
-    if _file_path == "":
-        return
-    _output_file = open(_file_path, 'wb')
+	if _file_path == "":
+		return
+	_output_file = open(_file_path, 'wb')
 
-    for _word in _words:
-        _output_file.write(_word + "\n")
-    _output_file.close()
+	for _word in _words:
+		_output_file.write(_word + "\n")
+	_output_file.close()
 
 
 name_file_path = "resource/human_names.txt"

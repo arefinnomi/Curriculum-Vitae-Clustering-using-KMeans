@@ -12,13 +12,13 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 
 def load_word(_file_path=""):
-    if _file_path == "":
-        return []
-    _file = open(_file_path, 'r')
-    _text = _file.read()
-    _file.close()
-    _words = word_tokenize(_text)
-    return _words
+	if _file_path == "":
+		return []
+	_file = open(_file_path, 'r')
+	_text = _file.read()
+	_file.close()
+	_words = word_tokenize(_text)
+	return _words
 
 
 # setting values
@@ -57,13 +57,13 @@ stemmer = SnowballStemmer('english', ignore_stopwords=False)
 
 class StemmedTfidfVectorizer(TfidfVectorizer):
 
-    def __init__(self, _stemmer, *args, **kwargs):
-        super(StemmedTfidfVectorizer, self).__init__(*args, **kwargs)
-        self.stemmer = _stemmer
+	def __init__(self, _stemmer, *args, **kwargs):
+		super(StemmedTfidfVectorizer, self).__init__(*args, **kwargs)
+		self.stemmer = _stemmer
 
-    def build_analyzer(self):
-        analyzer = super(StemmedTfidfVectorizer, self).build_analyzer()
-        return lambda _doc: (self.stemmer.stem(word) for word in analyzer(_doc.replace('\n', ' ')))
+	def build_analyzer(self):
+		analyzer = super(StemmedTfidfVectorizer, self).build_analyzer()
+		return lambda _doc: (self.stemmer.stem(word) for word in analyzer(_doc.replace('\n', ' ')))
 
 
 # TF-IDF, features extraction
@@ -82,17 +82,17 @@ km.fit(X)
 output_subdir_names = []
 common_words = km.cluster_centers_.argsort()[:, -1:-15:-1]
 for num, centroid in enumerate(common_words):
-    output_subdir_names.append(', '.join(word_features[word] for word in centroid))
+	output_subdir_names.append(', '.join(word_features[word] for word in centroid))
 
 output_subdir_paths = [output_dir_path + _output_subdir_name for _output_subdir_name in output_subdir_names]
 
 if os.path.exists(output_dir_path):
-    shutil.rmtree(output_dir_path)
+	shutil.rmtree(output_dir_path)
 os.mkdir(output_dir_path)
 
 for _output_subdir_path in output_subdir_paths:
-    if not os.path.exists(_output_subdir_path):
-        os.makedirs(_output_subdir_path)
+	if not os.path.exists(_output_subdir_path):
+		os.makedirs(_output_subdir_path)
 
 for index, label in enumerate(km.labels_):
-    shutil.copy(input_dir_path + filenames[index], output_subdir_paths[label])
+	shutil.copy(input_dir_path + filenames[index], output_subdir_paths[label])
